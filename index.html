@@ -10,7 +10,7 @@
     <div id="app">
       <div>
         <h2>Member Service</h2>
-        <input type="text" v-model="name" />
+        <input type="text" ref="name" />
         <button @click="addMember" :class="['primary__btn', {active: !!name}]">
           Add Member
         </button>

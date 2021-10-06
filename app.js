@@ -1,4 +1,4 @@
-Vue.createApp({
+const app = Vue.createApp({
   data() {
     return {
       members: [],
@@ -7,16 +7,46 @@ Vue.createApp({
   },
   methods: {
     addMember() {
-      this.members.push(this.name);
+      this.members.push(this.$refs.name.value);
       this.name = "";
     },
     removeMember(index) {
       this.members.splice(index, 1);
     },
   },
-}).mount("#app");
+  beforeCreate() {
+    console.log("beforeCreate()");
+  },
+  created() {
+    console.log("created()");
+  },
+  beforeMount() {
+    console.log("beforeMount()");
+  },
+  mounted() {
+    console.log("mounted()");
+  },
+  beforeUpdate() {
+    console.log("beforeUpdate()");
+  },
+  updated() {
+    console.log("updated()");
+  },
+  beforeUnmount() {
+    console.log("beforeUnmount()");
+  },
+  unmounted() {
+    console.log("unmounted()");
+  },
+});
 
-Vue.createApp({
+app.mount("#app");
+
+setTimeout(() => {
+  app.unmount();
+}, 3000);
+
+const app2 = Vue.createApp({
   template: `
     <h2>{{ serviceName }}</h2>
   `,
@@ -25,4 +55,6 @@ Vue.createApp({
       serviceName: "Other Service",
     };
   },
-}).mount("#app2");
+});
+
+app2.mount("#app2");
