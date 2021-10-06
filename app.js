@@ -7,8 +7,8 @@ Vue.createApp({
     };
   },
   methods: {
-    setName(event) {
-      this.name = event.target.value;
+    setName(event, lastname) {
+      this.name = `${event.target.value} ${lastname}`;
     }
   }
 }).mount('#app');

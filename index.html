@@ -12,7 +12,7 @@
       <p>Learn more <a :href="vueLink">about vue</a></p>
       <div>
         <label for="name">Your name is {{ name }}</label>
-        <input type="text" id="name" @input="setName" />
+        <input type="text" id="name" @input="setName($event, 'Doe')" />
       </div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
