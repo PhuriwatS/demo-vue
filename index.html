@@ -8,11 +8,10 @@
   </head>
   <body>
     <div id="app">
-      <p v-html="outputHtml"></p>
-      <p>Learn more <a :href="vueLink">about vue</a></p>
       <div>
-        <label for="name">Your name is {{ name }}</label>
-        <input type="text" id="name" @input="setName($event, 'Doe')" />
+        <p>Your name is {{ outputFullname() }}</p>
+        <input type="text" v-model="name" />
+        <button @click="resetInput">Reset</button>
       </div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
