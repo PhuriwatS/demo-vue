@@ -9,13 +9,21 @@
   <body>
     <div id="app">
       <div>
-        <p>Your name is {{ fullname }}</p>
+        <h2>Member Service</h2>
         <input type="text" v-model="name" />
         <button
-          @click="resetInput"
+          @click="addMember"
           :class="['primary__btn', {active: !!name}]"
-        >Reset</button>
+        >Add Member</button>
       </div>
+      <p v-if="members.length === 0">No members right now.</p>
+      <ul v-else>
+        <li
+          v-for="(member, index) in members"
+          :key="member"
+          @click="removeMember(index)"
+        >{{ index+1 }} - {{ member }}</li>
+      </ul>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="app.js"></script>
