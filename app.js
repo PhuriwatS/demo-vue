@@ -1,6 +1,7 @@
 Vue.createApp({
   data() {
     return {
+      vueLink: 'https://vuejs.org/',
       goals: [],
       enteredValue: ''
     };
