@@ -21,7 +21,10 @@
         <li v-for="(member, index) in members">{{ index+1 }} - {{ member }}</li>
       </ul>
       <ul>
-        <li v-for="num in 10">{{ num }}</li>
+        <li v-for="value in {name: 'Max', age: '31'}">{{ value }}</li>
+      </ul>
+      <ul>
+        <li v-for="(value, key, index) in {name: 'Max', age: '31'}">{{ index+1 }} - {{ key }} - {{ value }}</li>
       </ul>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
