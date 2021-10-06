@@ -11,13 +11,9 @@
       <p v-html="outputHtml"></p>
       <p>Learn more <a :href="vueLink">about vue</a></p>
       <div>
-        <label for="goal">Goal</label>
-        <input type="text" id="goal" v-model="enteredValue" />
-        <button v-on:click="addGoal">Add Goal</button>
+        <label for="name">Your name is {{ name }}</label>
+        <input type="text" id="name" @input="setName" />
       </div>
-      <ul>
-        <li v-for="goal in goals">{{ goal }}</li>
-      </ul>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="app.js"></script>
