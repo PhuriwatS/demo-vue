@@ -17,9 +17,8 @@
         >Add Member</button>
       </div>
       <p v-if="members.length === 0">No members right now.</p>
-      <p v-else-if="members.length > 3">More than 3 members.</p>
       <ul v-else>
-        <li>Member A</li>
+        <li v-for="member in members">{{ member }}</li>
       </ul>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
