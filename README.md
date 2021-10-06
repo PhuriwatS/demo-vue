@@ -1,5 +1,24 @@
-# Demo Vue
+# demo-vue
 
-> Project demo for learning VueJS
+## Project setup
+```
+npm install
+```
 
-For a detailed explanation on how things work, check out the [guide](https://vuejs.org/v2/guide/).
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
