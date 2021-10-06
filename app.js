@@ -4,10 +4,12 @@ Vue.createApp({
       name: 'John',
     };
   },
-  methods: {
-    outputFullname() {
+  computed: {
+    fullname() {
       return `${this.name} Doe`;
-    },
+    }
+  },
+  methods: {
     resetInput() {
       this.name = 'John';
     }
