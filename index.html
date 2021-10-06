@@ -11,7 +11,10 @@
       <div>
         <p>Your name is {{ fullname }}</p>
         <input type="text" v-model="name" />
-        <button @click="resetInput">Reset</button>
+        <button
+          @click="resetInput"
+          :style="{backgroundColor: name ? 'red' : 'white'}"
+        >Reset</button>
       </div>
     </div>
     <script src="https://unpkg.com/vue@next"></script>

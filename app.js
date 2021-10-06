@@ -17,7 +17,8 @@ Vue.createApp({
   // },
   methods: {
     resetInput() {
-      this.name = 'John';
+      this.name = '';
+      this.fullname = 'John Doe';
     }
   }
 }).mount('#app');
