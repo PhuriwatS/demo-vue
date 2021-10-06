@@ -10,11 +10,10 @@
     <div id="app">
       <div>
         <h2>Member Service</h2>
-        <input type="text" v-model="name" />
-        <button
-          @click="addMember"
-          :class="['primary__btn', {active: !!name}]"
-        >Add Member</button>
+        <input type="text" ref="name" />
+        <button @click="addMember" :class="['primary__btn', {active: !!name}]">
+          Add Member
+        </button>
       </div>
       <p v-if="members.length === 0">No members right now.</p>
       <ul v-else>
@@ -22,9 +21,12 @@
           v-for="(member, index) in members"
           :key="member"
           @click="removeMember(index)"
-        >{{ index+1 }} - {{ member }}</li>
+        >
+          {{ index+1 }} - {{ member }}
+        </li>
       </ul>
     </div>
+    <div id="app2"></div>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="app.js"></script>
   </body>
