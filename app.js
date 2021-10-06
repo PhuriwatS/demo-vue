@@ -17,6 +17,9 @@ Vue.createApp({
 }).mount("#app");
 
 Vue.createApp({
+  template: `
+    <h2>{{ serviceName }}</h2>
+  `,
   data() {
     return {
       serviceName: "Other Service",
