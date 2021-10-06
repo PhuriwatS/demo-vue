@@ -16,7 +16,9 @@
           :class="['primary__btn', {active: !!name}]"
         >Add Member</button>
       </div>
-      <ul>
+      <p v-if="members.length === 0">No members right now.</p>
+      <p v-else-if="members.length > 3">More than 3 members.</p>
+      <ul v-else>
         <li>Member A</li>
       </ul>
     </div>
