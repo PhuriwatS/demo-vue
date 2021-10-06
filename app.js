@@ -1,14 +1,20 @@
 Vue.createApp({
   data() {
     return {
-      name: 'John',
+      name: '',
+      fullname: 'John Doe',
     };
   },
-  computed: {
-    fullname() {
-      return `${this.name} Doe`;
+  watch: {
+    name(lastValue) {
+      this.fullname =  `${lastValue} Doe`;
     }
   },
+  // computed: {
+  //   fullname() {
+  //     return `${this.name} Doe`;
+  //   }
+  // },
   methods: {
     resetInput() {
       this.name = 'John';
