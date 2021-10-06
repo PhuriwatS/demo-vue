@@ -9,13 +9,16 @@
   <body>
     <div id="app">
       <div>
-        <p>Your name is {{ fullname }}</p>
+        <h2>Member Service</h2>
         <input type="text" v-model="name" />
         <button
-          @click="resetInput"
+          @click="addMember"
           :class="['primary__btn', {active: !!name}]"
-        >Reset</button>
+        >Add Member</button>
       </div>
+      <ul>
+        <li>Member A</li>
+      </ul>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="app.js"></script>

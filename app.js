@@ -1,24 +1,14 @@
 Vue.createApp({
   data() {
     return {
+      members: [],
       name: '',
-      fullname: 'John Doe',
     };
   },
-  watch: {
-    name(lastValue) {
-      this.fullname =  `${lastValue} Doe`;
-    }
-  },
-  // computed: {
-  //   fullname() {
-  //     return `${this.name} Doe`;
-  //   }
-  // },
   methods: {
-    resetInput() {
+    addMember() {
+      this.members.push(this.name);
       this.name = '';
-      this.fullname = 'John Doe';
     }
   }
 }).mount('#app');
