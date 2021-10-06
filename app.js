@@ -1,60 +1,53 @@
 const app = Vue.createApp({
   data() {
     return {
-      members: [],
-      name: "",
+      friends: [
+        {
+          id: "manuel",
+          name: "Manuel Lorenz",
+          phone: "0812223333",
+          email: "manuel@gmail.com",
+        },
+        {
+          id: "julie",
+          name: "Julie Jones",
+          phone: "0814445555",
+          email: "julie@gmail.com",
+        },
+      ],
+    };
+  },
+});
+
+app.component("friend-contact", {
+  template: `
+    <li>
+      <h2>{{ friend.name }}</h2>
+      <button @click="toggleDetails">
+        {{ isDetailVisible ? "Hide" : "Show"}} Details
+      </button>
+      <ul v-if="isDetailVisible">
+        <li><strong>Phone:</strong> {{ friend.phone }}</li>
+        <li><strong>Email:</strong> {{ friend.email }}</li>
+      </ul>
+    </li>
+  `,
+  data() {
+    return {
+      isDetailVisible: false,
+      friend: {
+        id: "manuel",
+        name: "Manuel Lorenz",
+        phone: "0812223333",
+        email: "manuel@gmail.com",
+      },
     };
   },
   methods: {
-    addMember() {
-      this.members.push(this.$refs.name.value);
-      this.name = "";
+    toggleDetails() {
+      this.isDetailVisible = !this.isDetailVisible;
     },
-    removeMember(index) {
-      this.members.splice(index, 1);
-    },
-  },
-  beforeCreate() {
-    console.log("beforeCreate()");
-  },
-  created() {
-    console.log("created()");
-  },
-  beforeMount() {
-    console.log("beforeMount()");
-  },
-  mounted() {
-    console.log("mounted()");
-  },
-  beforeUpdate() {
-    console.log("beforeUpdate()");
-  },
-  updated() {
-    console.log("updated()");
-  },
-  beforeUnmount() {
-    console.log("beforeUnmount()");
-  },
-  unmounted() {
-    console.log("unmounted()");
   },
 });
 
 app.mount("#app");
-
-setTimeout(() => {
-  app.unmount();
-}, 3000);
-
-const app2 = Vue.createApp({
-  template: `
-    <h2>{{ serviceName }}</h2>
-  `,
-  data() {
-    return {
-      serviceName: "Other Service",
-    };
-  },
-});
-
-app2.mount("#app2");
