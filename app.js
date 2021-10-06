@@ -9,6 +9,9 @@ Vue.createApp({
     addMember() {
       this.members.push(this.name);
       this.name = '';
+    },
+    removeMember(index) {
+      this.members.splice(index, 1);
     }
   }
 }).mount('#app');

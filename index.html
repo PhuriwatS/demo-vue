@@ -18,13 +18,11 @@
       </div>
       <p v-if="members.length === 0">No members right now.</p>
       <ul v-else>
-        <li v-for="(member, index) in members">{{ index+1 }} - {{ member }}</li>
-      </ul>
-      <ul>
-        <li v-for="value in {name: 'Max', age: '31'}">{{ value }}</li>
-      </ul>
-      <ul>
-        <li v-for="(value, key, index) in {name: 'Max', age: '31'}">{{ index+1 }} - {{ key }} - {{ value }}</li>
+        <li
+          v-for="(member, index) in members"
+          :key="member"
+          @click="removeMember(index)"
+        >{{ index+1 }} - {{ member }}</li>
       </ul>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
