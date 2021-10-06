@@ -18,7 +18,10 @@
       </div>
       <p v-if="members.length === 0">No members right now.</p>
       <ul v-else>
-        <li v-for="member in members">{{ member }}</li>
+        <li v-for="(member, index) in members">{{ index+1 }} - {{ member }}</li>
+      </ul>
+      <ul>
+        <li v-for="num in 10">{{ num }}</li>
       </ul>
     </div>
     <script src="https://unpkg.com/vue@next"></script>
