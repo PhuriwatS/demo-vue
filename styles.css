@@ -38,3 +38,15 @@ li {
   padding: 1rem;
   border: 1px solid #ccc;
 }
+
+.primary__btn {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.active {
+  color: white;
+  background-color: #ff0000;
+}
