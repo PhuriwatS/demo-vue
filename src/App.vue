@@ -63,6 +63,11 @@ export default {
       this.friends = this.friends.filter((friend) => friend.id !== friendId);
     },
   },
+  provide() {
+    return {
+      friends: this.friends,
+    };
+  },
 };
 </script>
 

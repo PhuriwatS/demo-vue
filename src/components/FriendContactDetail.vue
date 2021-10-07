@@ -7,6 +7,10 @@
     <strong>Email:</strong>
     {{ email }}
   </li>
+  <li>
+    <strong>My Friends:</strong>
+    {{ myFriends }}
+  </li>
 </template>
 
 <script>
@@ -18,6 +22,12 @@ export default {
     email: {
       type: String,
       default: "",
+    },
+  },
+  inject: ["friends"],
+  computed: {
+    myFriends() {
+      return this.friends.map((cv) => cv.name).join(", ");
     },
   },
 };
