@@ -20,18 +20,18 @@
 
 <script>
 export default {
-  emits: ['add-contact'],
+  emits: ["add-contact"],
   data() {
     return {
-      enteredName: '',
-      enteredPhone: '',
-      enteredEmail: '',
+      enteredName: "",
+      enteredPhone: "",
+      enteredEmail: "",
     };
   },
   methods: {
     submitData() {
       this.$emit(
-        'add-contact',
+        "add-contact",
         this.enteredName,
         this.enteredPhone,
         this.enteredEmail
@@ -40,3 +40,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#app button {
+  border: 1px solid #0091ff;
+  border-radius: 10px;
+  background-color: #0091ff;
+  padding: 0.5rem 1rem;
+}
+</style>
