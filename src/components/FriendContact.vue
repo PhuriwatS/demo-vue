@@ -6,14 +6,7 @@
       {{ detailsAreVisible ? "Hide" : "Show" }} Details
     </button>
     <ul v-if="detailsAreVisible">
-      <li>
-        <strong>Phone:</strong>
-        {{ phone }}
-      </li>
-      <li>
-        <strong>Email:</strong>
-        {{ email }}
-      </li>
+      <friend-contact-detail :phone="phone" :email="email" />
     </ul>
     <button @click="$emit('delete', id)">Delete</button>
   </li>
