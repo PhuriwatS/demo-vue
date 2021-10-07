@@ -2,8 +2,8 @@
   <section>
     <header>
       <Title>
-        <span>My Friends</span>
-        <template v-slot:description
+        <!-- <span>My Friends</span> -->
+        <template #description
           ><span>I will keep my friends list nearly.</span>
         </template>
       </Title>

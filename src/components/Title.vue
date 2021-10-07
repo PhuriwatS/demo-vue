@@ -1,6 +1,6 @@
 <template>
   <h1>
-    <slot></slot>
+    <slot>I'm default title</slot>
   </h1>
   <p>
     <slot name="description"></slot>
