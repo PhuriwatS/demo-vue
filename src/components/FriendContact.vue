@@ -6,14 +6,19 @@
       {{ detailsAreVisible ? "Hide" : "Show" }} Details
     </button>
     <ul v-if="detailsAreVisible">
-      <friend-contact-detail :phone="phone" :email="email" />
+      <FriendContactDetail :phone="phone" :email="email" />
     </ul>
     <button @click="$emit('delete', id)">Delete</button>
   </li>
 </template>
 
 <script>
+import FriendContactDetail from "./FriendContactDetail.vue";
+
 export default {
+  components: {
+    FriendContactDetail,
+  },
   props: {
     id: {
       type: String,
