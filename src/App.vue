@@ -5,6 +5,17 @@
         <span>My Friends</span>
       </Title>
     </header>
+    <ul>
+      <li>
+        <button @click="setSelectedComponent('component-a')">
+          Component A
+        </button>
+        <button @click="setSelectedComponent('component-b')">
+          Component B
+        </button>
+        <component :is="selectedComponent" />
+      </li>
+    </ul>
     <new-friend @add-contact="addContact"></new-friend>
     <ul>
       <friend-contact
@@ -45,6 +56,7 @@ export default {
           isFavorite: false,
         },
       ],
+      selectedComponent: "",
     };
   },
   methods: {
@@ -66,6 +78,9 @@ export default {
     },
     deleteContact(friendId) {
       this.friends = this.friends.filter((friend) => friend.id !== friendId);
+    },
+    setSelectedComponent(selected) {
+      this.selectedComponent = selected;
     },
   },
   provide() {
