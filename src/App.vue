@@ -1,7 +1,12 @@
 <template>
   <section>
     <header>
-      <Title>My Friends</Title>
+      <Title>
+        <span>My Friends</span>
+        <template v-slot:description
+          ><span>I will keep my friends list nearly.</span>
+        </template>
+      </Title>
     </header>
     <new-friend @add-contact="addContact"></new-friend>
     <ul>

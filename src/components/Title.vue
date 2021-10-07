@@ -2,6 +2,9 @@
   <h1>
     <slot></slot>
   </h1>
+  <p>
+    <slot name="description"></slot>
+  </p>
 </template>
 
 <script>
