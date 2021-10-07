@@ -17,7 +17,22 @@
 
 <script>
 export default {
-  props: ["name", "phone", "email"],
+  props: {
+    name: {
+      type: String,
+      required: true,
+      validator: function(value) {
+        return isNaN(value);
+      },
+    },
+    phone: {
+      type: String,
+    },
+    Email: {
+      type: String,
+      default: "",
+    },
+  },
   data() {
     return {
       detailsAreVisible: false,
