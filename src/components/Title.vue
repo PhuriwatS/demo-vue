@@ -2,7 +2,7 @@
   <h1>
     <slot>I'm default title</slot>
   </h1>
-  <p>
+  <p v-if="$slots.description">
     <slot name="description"></slot>
   </p>
 </template>

@@ -2,10 +2,7 @@
   <section>
     <header>
       <Title>
-        <!-- <span>My Friends</span> -->
-        <template #description
-          ><span>I will keep my friends list nearly.</span>
-        </template>
+        <span>My Friends</span>
       </Title>
     </header>
     <new-friend @add-contact="addContact"></new-friend>
