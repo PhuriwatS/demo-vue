@@ -1,7 +1,7 @@
 <template>
   <section>
     <header>
-      <h1>My Friends</h1>
+      <Title>My Friends</Title>
     </header>
     <new-friend @add-contact="addContact"></new-friend>
     <ul>
@@ -21,7 +21,10 @@
 </template>
 
 <script>
+import Title from "./components/Title.vue";
+
 export default {
+  components: { Title },
   data() {
     return {
       friends: [
