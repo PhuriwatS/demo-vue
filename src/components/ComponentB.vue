@@ -1,6 +1,9 @@
 <template>
   <p>Component B</p>
   <div>
+    <CustomComponent v-model="searchText"></CustomComponent>
+  </div>
+  <div>
     <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
     <label for="jack">Jack</label>
     <input type="checkbox" id="john" value="John" v-model="checkedNames" />
@@ -19,9 +22,15 @@
 </template>
 
 <script>
+import CustomComponent from "./CustomComponent.vue";
+
 export default {
+  components: {
+    CustomComponent,
+  },
   data() {
     return {
+      searchText: "",
       checkedNames: [],
       picked: "One",
     };
