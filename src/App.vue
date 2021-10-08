@@ -18,7 +18,7 @@
         </keep-alive>
       </li>
     </ul>
-    <new-friend @add-contact="addContact"></new-friend>
+    <new-friend />
     <ul>
       <friend-contact
         v-for="friend in friends"
@@ -67,16 +67,6 @@ export default {
         (friend) => friend.id === friendId
       );
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
-    },
-    addContact(name, phone, email) {
-      const newFriendContact = {
-        id: new Date().toISOString(),
-        name: name,
-        phone: phone,
-        email: email,
-        isFavorite: false,
-      };
-      this.friends.push(newFriendContact);
     },
     deleteContact(friendId) {
       this.friends = this.friends.filter((friend) => friend.id !== friendId);

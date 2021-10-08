@@ -30,12 +30,25 @@ export default {
   },
   methods: {
     submitData() {
-      this.$emit(
-        "add-contact",
-        this.enteredName,
-        this.enteredPhone,
-        this.enteredEmail
-      );
+      fetch(
+        "https://fir-vue-a0eb5-default-rtdb.asia-southeast1.firebasedatabase.app/friends.json",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: this.enteredName,
+            phone: this.enteredPhone,
+            email: this.enteredEmail,
+            isFavorite: false,
+          }),
+        }
+      ).then(() => {
+        this.enteredName = "";
+        this.enteredPhone = "";
+        this.enteredEmail = "";
+      });
     },
   },
 };
