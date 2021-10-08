@@ -3,11 +3,13 @@
   <label for="likedChar"></label>
   <input type="text" name="likedChar" ref="likedChar" />
   <button @click="setLikedChar">Set Character</button>
-  <ErrorAlert v-if="isInputInvalid">
-    <h2>Input is invalid!</h2>
-    <p>Please enter a few characters...</p>
-    <button @click="confirmError">OK</button>
-  </ErrorAlert>
+  <teleport to="body">
+    <ErrorAlert v-if="isInputInvalid">
+      <h2>Input is invalid!</h2>
+      <p>Please enter a few characters...</p>
+      <button @click="confirmError">OK</button>
+    </ErrorAlert>
+  </teleport>
 </template>
 
 <script>
