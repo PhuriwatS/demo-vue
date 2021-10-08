@@ -16,6 +16,9 @@
       <button>Add Contact</button>
     </div>
   </form>
+  <ul v-if="!isLoading && error">
+    <li>{{ error }}</li>
+  </ul>
 </template>
 
 <script>
@@ -23,6 +26,8 @@ export default {
   emits: ["add-contact"],
   data() {
     return {
+      isLoading: false,
+      error: null,
       enteredName: "",
       enteredPhone: "",
       enteredEmail: "",
@@ -30,8 +35,10 @@ export default {
   },
   methods: {
     submitData() {
+      this.isLoading = true;
+      this.error = null;
       fetch(
-        "https://fir-vue-a0eb5-default-rtdb.asia-southeast1.firebasedatabase.app/friends.json",
+        "https://fir-vue-a0eb5-default-rtdb.asia-southeast1.firebasedatabase.app/friend.json",
         {
           method: "POST",
           headers: {
@@ -44,11 +51,22 @@ export default {
             isFavorite: false,
           }),
         }
-      ).then(() => {
-        this.enteredName = "";
-        this.enteredPhone = "";
-        this.enteredEmail = "";
-      });
+      )
+        .then((response) => {
+          if (response.ok) {
+            this.isLoading = false;
+            this.enteredName = "";
+            this.enteredPhone = "";
+            this.enteredEmail = "";
+          } else {
+            throw new Error("Could not save data!");
+          }
+        })
+        .catch((error) => {
+          console.log("error", error);
+          this.isLoading = false;
+          this.error = error.message;
+        });
     },
   },
 };

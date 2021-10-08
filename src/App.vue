@@ -22,10 +22,13 @@
     <ul v-if="isLoading">
       <li>Loading...</li>
     </ul>
-    <ul v-else-if="!isLoading && (!friends || friends.length == 0)">
+    <ul v-else-if="!isLoading && error">
+      <li>{{ error }}</li>
+    </ul>
+    <ul v-else-if="!isLoading && (!friends || friends.length === 0)">
       <li>No friends list found.</li>
     </ul>
-    <ul v-else-if="!isLoading && friends && friends.length > 0">
+    <ul v-else>
       <friend-contact
         v-for="friend in friends"
         :key="friend.id"
@@ -49,13 +52,18 @@ export default {
   data() {
     return {
       isLoading: false,
+      error: null,
       friends: [],
       selectedComponent: "",
     };
   },
+  beforeUpdate() {
+    console.log("renderrrr");
+  },
   methods: {
     loadFriends() {
       this.isLoading = true;
+      this.error = null;
       fetch(
         "https://fir-vue-a0eb5-default-rtdb.asia-southeast1.firebasedatabase.app/friends.json"
       )
@@ -77,6 +85,11 @@ export default {
             });
           }
           this.friends = results;
+        })
+        .catch((error) => {
+          console.log("error", error);
+          this.isLoading = false;
+          this.error = "Fail to fetch data - Please try again.";
         });
     },
     toggleFavoriteStatus(friendId) {
