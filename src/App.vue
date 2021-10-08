@@ -19,7 +19,13 @@
       </li>
     </ul>
     <new-friend />
-    <ul>
+    <ul v-if="isLoading">
+      <li>Loading...</li>
+    </ul>
+    <ul v-else-if="!isLoading && (!friends || friends.length == 0)">
+      <li>No friends list found.</li>
+    </ul>
+    <ul v-else-if="!isLoading && friends && friends.length > 0">
       <friend-contact
         v-for="friend in friends"
         :key="friend.id"
@@ -42,12 +48,14 @@ export default {
   components: { Title },
   data() {
     return {
+      isLoading: false,
       friends: [],
       selectedComponent: "",
     };
   },
   methods: {
     loadFriends() {
+      this.isLoading = true;
       fetch(
         "https://fir-vue-a0eb5-default-rtdb.asia-southeast1.firebasedatabase.app/friends.json"
       )
@@ -57,6 +65,7 @@ export default {
           }
         })
         .then((data) => {
+          this.isLoading = false;
           const results = [];
           for (const id in data) {
             results.push({
