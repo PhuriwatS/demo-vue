@@ -13,7 +13,9 @@
         <button @click="setSelectedComponent('component-b')">
           Component B
         </button>
-        <component :is="selectedComponent" />
+        <keep-alive>
+          <component :is="selectedComponent" />
+        </keep-alive>
       </li>
     </ul>
     <new-friend @add-contact="addContact"></new-friend>
