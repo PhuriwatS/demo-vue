@@ -42,26 +42,34 @@ export default {
   components: { Title },
   data() {
     return {
-      friends: [
-        {
-          id: "manuel",
-          name: "Manuel Lorenz",
-          phone: "0123 45678 90",
-          email: "manuel@localhost.com",
-          isFavorite: false,
-        },
-        {
-          id: "julie",
-          name: "Julie Jones",
-          phone: "0987 654421 21",
-          email: "julie@localhost.com",
-          isFavorite: false,
-        },
-      ],
+      friends: [],
       selectedComponent: "",
     };
   },
   methods: {
+    loadFriends() {
+      fetch(
+        "https://fir-vue-a0eb5-default-rtdb.asia-southeast1.firebasedatabase.app/friends.json"
+      )
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          const results = [];
+          for (const id in data) {
+            results.push({
+              id: id,
+              name: data[id].name,
+              phone: data[id].phone,
+              email: data[id].email,
+              isFavorite: data[id].isFavorite,
+            });
+          }
+          this.friends = results;
+        });
+    },
     toggleFavoriteStatus(friendId) {
       const identifiedFriend = this.friends.find(
         (friend) => friend.id === friendId
@@ -79,6 +87,9 @@ export default {
     return {
       friends: this.friends,
     };
+  },
+  mounted() {
+    this.loadFriends();
   },
 };
 </script>
