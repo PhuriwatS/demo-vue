@@ -18,8 +18,17 @@
         </keep-alive>
       </li>
     </ul>
-    <new-friend @add-contact="addContact"></new-friend>
-    <ul>
+    <new-friend />
+    <ul v-if="isLoading">
+      <li>Loading...</li>
+    </ul>
+    <ul v-else-if="!isLoading && error">
+      <li>{{ error }}</li>
+    </ul>
+    <ul v-else-if="!isLoading && (!friends || friends.length === 0)">
+      <li>No friends list found.</li>
+    </ul>
+    <ul v-else>
       <friend-contact
         v-for="friend in friends"
         :key="friend.id"
@@ -42,41 +51,52 @@ export default {
   components: { Title },
   data() {
     return {
-      friends: [
-        {
-          id: "manuel",
-          name: "Manuel Lorenz",
-          phone: "0123 45678 90",
-          email: "manuel@localhost.com",
-          isFavorite: false,
-        },
-        {
-          id: "julie",
-          name: "Julie Jones",
-          phone: "0987 654421 21",
-          email: "julie@localhost.com",
-          isFavorite: false,
-        },
-      ],
+      isLoading: false,
+      error: null,
+      friends: [],
       selectedComponent: "",
     };
   },
+  beforeUpdate() {
+    console.log("renderrrr");
+  },
   methods: {
+    loadFriends() {
+      this.isLoading = true;
+      this.error = null;
+      fetch(
+        "https://fir-vue-a0eb5-default-rtdb.asia-southeast1.firebasedatabase.app/friends.json"
+      )
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          this.isLoading = false;
+          const results = [];
+          for (const id in data) {
+            results.push({
+              id: id,
+              name: data[id].name,
+              phone: data[id].phone,
+              email: data[id].email,
+              isFavorite: data[id].isFavorite,
+            });
+          }
+          this.friends = results;
+        })
+        .catch((error) => {
+          console.log("error", error);
+          this.isLoading = false;
+          this.error = "Fail to fetch data - Please try again.";
+        });
+    },
     toggleFavoriteStatus(friendId) {
       const identifiedFriend = this.friends.find(
         (friend) => friend.id === friendId
       );
       identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
-    },
-    addContact(name, phone, email) {
-      const newFriendContact = {
-        id: new Date().toISOString(),
-        name: name,
-        phone: phone,
-        email: email,
-        isFavorite: false,
-      };
-      this.friends.push(newFriendContact);
     },
     deleteContact(friendId) {
       this.friends = this.friends.filter((friend) => friend.id !== friendId);
@@ -89,6 +109,9 @@ export default {
     return {
       friends: this.friends,
     };
+  },
+  mounted() {
+    this.loadFriends();
   },
 };
 </script>
