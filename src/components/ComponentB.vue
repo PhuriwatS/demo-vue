@@ -1,5 +1,5 @@
 <template>
-  <span>Component B</span>
+  <p>Component B</p>
   <input type="text" />
 </template>
 
