@@ -1,6 +1,7 @@
 <template>
   <button @click="goToTeams">Go to teams</button>
   <button @click="goBack">Go back</button>
+  <button @click="saveChanges">Save Changes</button>
   <ul>
     <user-item
       v-for="user in users"
@@ -15,6 +16,11 @@
 import UserItem from "./UserItem.vue";
 
 export default {
+  data() {
+    return {
+      changesSaved: false,
+    };
+  },
   components: {
     UserItem,
   },
@@ -26,11 +32,29 @@ export default {
     goBack() {
       this.$router.back();
     },
+    saveChanges() {
+      this.changesSaved = true;
+    },
   },
   beforeRouteEnter(to, from, next) {
     console.log("UsersList Cmp beforeRouteEnter");
     console.log(to, from);
     next();
+  },
+  beforeRouteLeave(to, from, next) {
+    console.log("UsersList Cmp beforeRouteLeave");
+    console.log(to, from);
+    if (this.changesSaved) {
+      next();
+    } else {
+      const userWantsToLeave = confirm(
+        "Are you sure? You got unsaved changes!"
+      );
+      next(userWantsToLeave);
+    }
+  },
+  unmounted() {
+    console.log("unmounted");
   },
 };
 </script>
