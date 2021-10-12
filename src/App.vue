@@ -1,117 +1,41 @@
 <template>
-  <section>
-    <header>
-      <Title>
-        <span>My Friends</span>
-      </Title>
-    </header>
-    <ul>
-      <li>
-        <button @click="setSelectedComponent('component-a')">
-          Component A
-        </button>
-        <button @click="setSelectedComponent('component-b')">
-          Component B
-        </button>
-        <keep-alive>
-          <component :is="selectedComponent" />
-        </keep-alive>
-      </li>
-    </ul>
-    <new-friend />
-    <ul v-if="isLoading">
-      <li>Loading...</li>
-    </ul>
-    <ul v-else-if="!isLoading && error">
-      <li>{{ error }}</li>
-    </ul>
-    <ul v-else-if="!isLoading && (!friends || friends.length === 0)">
-      <li>No friends list found.</li>
-    </ul>
-    <ul v-else>
-      <friend-contact
-        v-for="friend in friends"
-        :key="friend.id"
-        :id="friend.id"
-        :name="friend.name"
-        :phone="friend.phone"
-        :email="friend.email"
-        :isFavorite="friend.isFavorite"
-        @toggleFavorite="toggleFavoriteStatus"
-        @delete="deleteContact"
-      />
-    </ul>
-  </section>
+  <the-navigation></the-navigation>
+  <main>
+    <router-view></router-view>
+  </main>
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
 
 <script>
-import Title from "./components/Title.vue";
+import TheNavigation from "./components/nav/TheNavigation.vue";
 
 export default {
-  components: { Title },
+  components: {
+    TheNavigation,
+  },
   data() {
     return {
-      isLoading: false,
-      error: null,
-      friends: [],
-      selectedComponent: "",
+      teams: [
+        { id: "t1", name: "Frontend Engineers", members: ["u1", "u2"] },
+        { id: "t2", name: "Backend Engineers", members: ["u1", "u2", "u3"] },
+        { id: "t3", name: "Client Consulting", members: ["u4", "u5"] },
+      ],
+      users: [
+        { id: "u1", fullName: "Max Schwarz", role: "Engineer" },
+        { id: "u2", fullName: "Praveen Kumar", role: "Engineer" },
+        { id: "u3", fullName: "Julie Jones", role: "Engineer" },
+        { id: "u4", fullName: "Alex Blackfield", role: "Consultant" },
+        { id: "u5", fullName: "Marie Smith", role: "Consultant" },
+      ],
     };
-  },
-  beforeUpdate() {
-    console.log("renderrrr");
-  },
-  methods: {
-    loadFriends() {
-      this.isLoading = true;
-      this.error = null;
-      fetch(
-        "https://fir-vue-a0eb5-default-rtdb.asia-southeast1.firebasedatabase.app/friends.json"
-      )
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-        })
-        .then((data) => {
-          this.isLoading = false;
-          const results = [];
-          for (const id in data) {
-            results.push({
-              id: id,
-              name: data[id].name,
-              phone: data[id].phone,
-              email: data[id].email,
-              isFavorite: data[id].isFavorite,
-            });
-          }
-          this.friends = results;
-        })
-        .catch((error) => {
-          console.log("error", error);
-          this.isLoading = false;
-          this.error = "Fail to fetch data - Please try again.";
-        });
-    },
-    toggleFavoriteStatus(friendId) {
-      const identifiedFriend = this.friends.find(
-        (friend) => friend.id === friendId
-      );
-      identifiedFriend.isFavorite = !identifiedFriend.isFavorite;
-    },
-    deleteContact(friendId) {
-      this.friends = this.friends.filter((friend) => friend.id !== friendId);
-    },
-    setSelectedComponent(selected) {
-      this.selectedComponent = selected;
-    },
   },
   provide() {
     return {
-      friends: this.friends,
+      teams: this.teams,
+      users: this.users,
     };
-  },
-  mounted() {
-    this.loadFriends();
   },
 };
 </script>
@@ -120,70 +44,12 @@ export default {
 * {
   box-sizing: border-box;
 }
+
 html {
-  font-family: "Jost", sans-serif;
+  font-family: sans-serif;
 }
+
 body {
   margin: 0;
-}
-header {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin: 3rem auto;
-  border-radius: 10px;
-  padding: 1rem;
-  background-color: #58004d;
-  color: white;
-  text-align: center;
-  width: 90%;
-  max-width: 40rem;
-}
-#app ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-#app li,
-#app form {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin: 1rem auto;
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-  width: 90%;
-  max-width: 40rem;
-}
-#app h2 {
-  font-size: 2rem;
-  border-bottom: 4px solid #ccc;
-  color: #58004d;
-  margin: 0 0 1rem 0;
-}
-#app button {
-  font: inherit;
-  cursor: pointer;
-  border: 1px solid #ff0077;
-  background-color: #ff0077;
-  color: white;
-  padding: 0.05rem 1rem;
-  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
-}
-#app button:hover,
-#app button:active {
-  background-color: #ec3169;
-  border-color: #ec3169;
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
-}
-#app input {
-  font: inherit;
-  padding: 0.15rem;
-}
-#app label {
-  font-weight: bold;
-  margin-right: 1rem;
-  width: 7rem;
-  display: inline-block;
-}
-#app form div {
-  margin: 1rem 0;
 }
 </style>
