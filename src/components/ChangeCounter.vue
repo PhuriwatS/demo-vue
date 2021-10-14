@@ -9,14 +9,14 @@ export default {
   methods: {
     /*
     addOne() {
-      //   this.$store.dispatch("increment", { value: 2 });
+      //   this.$store.dispatch("counterModule/increment", { value: 2 });
       this.$store.dispatch({
-        type: "increment",
+        type: "counterModule/increment",
         value: 2,
       });
     },
     */
-    ...mapActions(["increment"]),
+    ...mapActions("counterModule", ["increment"]),
   },
 };
 </script>

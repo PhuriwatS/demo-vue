@@ -9,12 +9,12 @@ import { mapGetters } from "vuex";
 export default {
   computed: {
     // finalCounter() {
-    //   return this.$store.getters.finalCounter;
+    //   return this.$store.getters["counterModule/finalCounter"];
     // },
     // normalizedCounter() {
-    //   return this.$store.getters.normalizedCounter;
+    //   return this.$store.getters["counterModule/normalizedCounter"];
     // },
-    ...mapGetters(["finalCounter", "normalizedCounter"]),
+    ...mapGetters("counterModule", ["finalCounter", "normalizedCounter"]),
   },
 };
 </script>
